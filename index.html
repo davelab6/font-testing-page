@@ -21,37 +21,8 @@ document.title = 'Font Testing Page v' + version + ' - Impallari.com/testing'
 
 function pushVersion(json) {
 	$.getJSON(json, function(data) {
-		// DEBUG console.log(data.metadata.codepoint)
-		if ( 0 > data.metadata.codepoint ) {
-			latestChar = 'unencoded glyph';
-			canHighlightChange = 0;
-		} else {
-			latestChar = String.fromCharCode(data.metadata.codepoint);
-			canHighlightChange = 1;
-		};
-
-		// DEBUG console.log(data)
-		var items = [];
-		items.push( data.seq );
-		items.push('<ul>');
-		items.push('<li id="v' + data.seq + '-codepoint">' + data.metadata.codepoint + ' (' + latestChar + ')</li>');
-		items.push('<li id="v' + data.seq + '-glyph">' + data.metadata.glyph + '</li>');
-		items.push('<li id="v' + data.seq + '-earl">' + data.metadata.earl + '</li>');
-		items.push('<li id="v' + data.seq + '-end">' + data.metadata.end + '</li>');
-		items.push('</ul></li>');
-		$('<li/>', {
-			'class': 'version',
-			'id': 'v' + data.seq,
-			html: items.join('')
-		}).appendTo('#versions');
-		
-		// TODO 
-		if ( canHighlightChange = 1 ) {
-			// TODO highlight
-		}
 		// Push version onto fontdrag.js system
 		TCNDDF.buildFontListItemFromCollabJsonData(data);
-		
 	});
 };
 

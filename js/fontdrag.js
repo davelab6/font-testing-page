@@ -19,7 +19,7 @@ var TCNDDF = TCNDDF || {};
 		contentStorageTimer;
 
 	TCNDDF.setup = function () {
-		dropListing = document.getElementById("fonts");
+		dropListing = document.getElementById("versions");
 		dropContainer = document.getElementById("dropcontainer");
 		displayContainer = document.getElementById("custom");
 		styleSheet = document.styleSheets[0];
@@ -197,17 +197,12 @@ var TCNDDF = TCNDDF || {};
 
 	/* 2013-04-21 Added buildFontListItemFromURL for collab */
 	TCNDDF.buildFontListItemFromCollabJsonData = function (data) {
-		domElements = [
-				document.createElement('li'),
-				document.createElement('span'),
-				document.createElement('span')
-		];
 
 		var name = 'font-' + data.seq,
 			url = data.metadata.earl,
 			size = 'XXX',
 			// 2013-04-19 DC Not sure why I have to duplicate these vars for Chrome, FFox doesn't need them, but duping them here works
-			dropListing = document.getElementById("fonts"),
+			dropListing = document.getElementById("versions"),
 			dropContainer = document.getElementById("dropcontainer"),
 			displayContainer = document.getElementById("custom"),
 			styleSheet = document.styleSheets[0];
@@ -216,13 +211,37 @@ var TCNDDF = TCNDDF || {};
 		fontFaceStyle = "@font-face{font-family: '" + name + "'; src:url('" + url + "');}";
 		styleSheet.insertRule(fontFaceStyle, 0);
 
+		// DEBUG console.log(data.metadata.codepoint)
+		if ( 0 > data.metadata.codepoint ) {
+			latestChar = 'unencoded glyph';
+			canHighlightChange = 0;
+		} else {
+			latestChar = String.fromCharCode(data.metadata.codepoint);
+			canHighlightChange = 1;
+		};
+				
+		domElements = [
+			document.createElement('li'),
+			document.createElement('ul'),
+			document.createElement('li'),
+			document.createElement('li'),
+			document.createElement('li'),
+			document.createElement('li'),
+		];
+		domElements[5].appendChild(document.createTextNode(data.metadata.glyph));
+		domElements[4].appendChild(document.createTextNode(data.metadata.codepoint+ ' (' + latestChar + ')'));
+		domElements[3].appendChild(document.createTextNode(url));
 		domElements[2].appendChild(document.createTextNode(size));
-		domElements[1].appendChild(document.createTextNode(name));
+		domElements[0].appendChild(document.createTextNode(name));
 		domElements[0].className = "active";
 		domElements[0].title = name;
-		domElements[0].style.fontFamily = name;
+		domElements[4].style.fontFamily = name;
+
 		domElements[0].appendChild(domElements[1]);
-		domElements[0].appendChild(domElements[2]);
+		domElements[1].appendChild(domElements[2]);
+		domElements[1].appendChild(domElements[3]);
+		domElements[1].appendChild(domElements[4]);
+		domElements[1].appendChild(domElements[5]);
 
 		fontPreviewFragment.appendChild(domElements[0]);
 
