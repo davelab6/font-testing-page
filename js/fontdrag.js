@@ -193,5 +193,43 @@ reader.addEventListener("loadend", TCNDDF.buildFontListItem, false);
 		}
 	};
 
+
+	/* 2013-04-21 Added buildFontListItemFromURL for collab */
+	TCNDDF.buildFontListItemFromCollabJsonData = function (data) {
+		domElements = [
+				document.createElement('li'),
+				document.createElement('span'),
+				document.createElement('span')
+		];
+
+		var name = 'font-' + data.seq,
+			url = data.metadata.earl,
+			size = 'XXX',
+			// 2013-04-19 DC Not sure why I have to duplicate these vars for Chrome, FFox doesn't need them, but duping them here works
+			dropListing = document.getElementById("fonts"),
+			dropContainer = document.getElementById("dropcontainer"),
+			displayContainer = document.getElementById("custom"),
+			styleSheet = document.styleSheets[0];
+
+		// Get font file and prepend it to stylsheet using @font-face rule
+		fontFaceStyle = "@font-face{font-family: '" + name + "'; src:url('" + url + "');}";
+		styleSheet.insertRule(fontFaceStyle, 0);
+
+		domElements[2].appendChild(document.createTextNode(size));
+		domElements[1].appendChild(document.createTextNode(name));
+		domElements[0].className = "active";
+		domElements[0].title = name;
+		domElements[0].style.fontFamily = name;
+		domElements[0].appendChild(domElements[1]);
+		domElements[0].appendChild(domElements[2]);
+
+		fontPreviewFragment.appendChild(domElements[0]);
+
+		dropListing.appendChild(fontPreviewFragment);
+		TCNDDF.updateActiveFont(domElements[0]);
+		displayContainer.style.fontFamily = name;
+		alert(fontFaceStyle)
+	};
+
 	window.addEventListener("load", TCNDDF.setup, false);
 })();
