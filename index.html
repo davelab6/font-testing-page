@@ -12,12 +12,46 @@
 <script src="js/otfeatures.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/contentEditable.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/constants.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/jquery.masonry.min.js" type="text/javascript" charset="utf-8"></script>
 
 <script>
 localStorage.clear();
 // Include the version in the page title
 var version = '10.0';
 document.title = 'Font Testing Page v' + version + ' - Impallari.com/testing'
+
+function pushVersion(json) {
+	$.getJSON(json, function(data) {
+		console.log(data.metadata.codepoint)
+		if ( 0 > data.metadata.codepoint ) {
+			latestChar = 'unencoded glyph';
+			canHighlightChange = 0;
+		} else {
+			latestChar = String.fromCharCode(data.metadata.codepoint);
+			canHighlightChange = 1;
+		};
+
+		console.log(data)
+		var items = [];
+		items.push( data.seq );
+		items.push('<ul>');
+		items.push('<li id="v' + data.seq + '-codepoint">Changed 0x' + data.metadata.codepoint + ' (' + latestChar + ')</li>');
+		items.push('<li id="v' + data.seq + '-glyph">' + data.metadata.glyph + '</li>');
+		items.push('<li id="v' + data.seq + '-earl">' + data.metadata.earl + '</li>');
+		items.push('<li id="v' + data.seq + '-end">' + data.metadata.end + '</li>');
+		items.push('</ul></li>');
+		$('<li/>', {
+			'class': 'version',
+			'id': 'v' + data.seq,
+			html: items.join('')
+		}).appendTo('#versions');
+		
+		// TODO 
+		if ( canHighlightChange = 1 ) {
+			// TODO highlight
+		}
+	});
+};
 
 $(document).ready(function(){
 		
@@ -39,7 +73,20 @@ $(document).ready(function(){
 
 	// OT Features initial Run
 	refreshFeatures();
-	
+
+	// Add a few example font version JSON files
+	pushVersion('font-35.json');
+	pushVersion('font-34.json');
+	pushVersion('font-33.json');
+	// Use jQuery Masonry to stop a gap appearing beween the versions list and the controls
+	$('#versions').masonry({
+		// options
+		itemSelector : '.version',
+		columnWidth : 240
+	});
+
+//			$("div:contains(latestChar)").css("background", "yellow"); <!-- use jQuery to highlight any div that contains the latestChar; ideally this will -->
+
 	// Grab the text from the JS constant file, and show it
 	prepareAndShowFontLayout();
 
@@ -48,7 +95,11 @@ $(document).ready(function(){
 </head>
 
 <body spellcheck="false">
-	
+
+<div id="collab">
+	<ol id="versions" style="text-align:left; float:right; clear:none" />
+</div>
+
 <!-- Header -->
 <section id="top">
 	<header><h1>Drag fonts here!</h1></header>
@@ -140,7 +191,7 @@ OT Features
 	</div>
 <!-- End OT features -->
 
-<section id="custom">
+<section id="custom" style="float:left; clear:none">
 
 	<div class="tabs">
 	  <!-- Navigation (Ideally, this should be outside the "custom" section, so the navigation's font does not change.) -->
