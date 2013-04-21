@@ -84,12 +84,11 @@ var TCNDDF = TCNDDF || {};
 		var reader = new FileReader();
 		reader.name = name;
 		reader.size = size;
-
-		/* 
-Chrome 6 dev can't do DOM2 event based listeners on the FileReader object so fallback to DOM0
-http://code.google.com/p/chromium/issues/detail?id=48367
-reader.addEventListener("loadend", TCNDDF.buildFontListItem, false);
-*/
+	/* 
+		Chrome 6 dev can't do DOM2 event based listeners on the FileReader object so fallback to DOM0
+		http://code.google.com/p/chromium/issues/detail?id=48367
+		reader.addEventListener("loadend", TCNDDF.buildFontListItem, false);
+	*/
 		reader.onloadend = function (event) {
 			TCNDDF.buildFontListItem(event);
 		}
