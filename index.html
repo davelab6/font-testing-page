@@ -35,7 +35,7 @@ function pushVersion(json) {
 		var items = [];
 		items.push( data.seq );
 		items.push('<ul>');
-		items.push('<li id="v' + data.seq + '-codepoint">Changed 0x' + data.metadata.codepoint + ' (' + latestChar + ')</li>');
+		items.push('<li id="v' + data.seq + '-codepoint">' + data.metadata.codepoint + ' (' + latestChar + ')</li>');
 		items.push('<li id="v' + data.seq + '-glyph">' + data.metadata.glyph + '</li>');
 		items.push('<li id="v' + data.seq + '-earl">' + data.metadata.earl + '</li>');
 		items.push('<li id="v' + data.seq + '-end">' + data.metadata.end + '</li>');
