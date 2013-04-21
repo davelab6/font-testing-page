@@ -220,6 +220,12 @@ var TCNDDF = TCNDDF || {};
 			canHighlightChange = 1;
 		};
 				
+/*
+		// TODO 
+		if ( canHighlightChange = 1 ) {
+			// TODO highlight
+		}
+*/
 		domElements = [
 			document.createElement('li'),
 			document.createElement('ul'),
