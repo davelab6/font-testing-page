@@ -139,10 +139,10 @@ var TCNDDF = TCNDDF || {};
 	TCNDDF.handleFontChange = function (evt) {
 		var clickTarget = evt.target || window.event.srcElement;
 
-		if (clickTarget.nodeName.toLowerCase() === 'span') {
-			clickTarget = clickTarget.parentNode;
+		if (clickTarget.parentNode === dropListing) {
 			TCNDDF.updateActiveFont(clickTarget);
 		} else {
+			clickTarget = clickTarget.parentNode;
 			TCNDDF.updateActiveFont(clickTarget);
 		}
 	};
