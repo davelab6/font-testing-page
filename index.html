@@ -22,7 +22,7 @@ document.title = 'Font Testing Page v' + version + ' - Impallari.com/testing'
 
 function pushVersion(json) {
 	$.getJSON(json, function(data) {
-		console.log(data.metadata.codepoint)
+		// DEBUG console.log(data.metadata.codepoint)
 		if ( 0 > data.metadata.codepoint ) {
 			latestChar = 'unencoded glyph';
 			canHighlightChange = 0;
@@ -31,7 +31,7 @@ function pushVersion(json) {
 			canHighlightChange = 1;
 		};
 
-		console.log(data)
+		// DEBUG console.log(data)
 		var items = [];
 		items.push( data.seq );
 		items.push('<ul>');

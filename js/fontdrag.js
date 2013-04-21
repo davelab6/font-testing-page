@@ -227,7 +227,7 @@ var TCNDDF = TCNDDF || {};
 		dropListing.appendChild(fontPreviewFragment);
 		TCNDDF.updateActiveFont(domElements[0]);
 		displayContainer.style.fontFamily = name;
-		alert(fontFaceStyle)
+		// DEBUG console.dir(fontFaceStyle)
 	};
 
 	window.addEventListener("load", TCNDDF.setup, false);
