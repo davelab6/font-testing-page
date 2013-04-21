@@ -130,7 +130,9 @@ var TCNDDF = TCNDDF || {};
 
 		fontPreviewFragment.appendChild(domElements[0]);
 
-		dropListing.appendChild(fontPreviewFragment);
+		dropListing.insertBefore(fontPreviewFragment, dropListing.firstChild);
+		// Comment the preceding line and uncomment the following to append FontListItems instead of prepending them
+		// dropListing.appendChild(fontPreviewFragment);
 		TCNDDF.updateActiveFont(domElements[0]);
 		displayContainer.style.fontFamily = name;
 	};
@@ -224,7 +226,9 @@ var TCNDDF = TCNDDF || {};
 
 		fontPreviewFragment.appendChild(domElements[0]);
 
-		dropListing.appendChild(fontPreviewFragment);
+		dropListing.insertBefore(fontPreviewFragment, dropListing.firstChild);
+		// Comment the preceding line and uncomment the following to append FontListItems instead of prepending them
+		// dropListing.appendChild(fontPreviewFragment);
 		TCNDDF.updateActiveFont(domElements[0]);
 		displayContainer.style.fontFamily = name;
 		// DEBUG console.dir(fontFaceStyle)
