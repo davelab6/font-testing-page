@@ -200,7 +200,7 @@ var TCNDDF = TCNDDF || {};
 
 		var name = 'font-' + data.seq,
 			url = data.metadata.earl,
-			size = 'XXX',
+			size = 'XXXkb', // TODO add this to JSON?
 			// 2013-04-19 DC Not sure why I have to duplicate these vars for Chrome, FFox doesn't need them, but duping them here works
 			dropListing = document.getElementById("versions"),
 			dropContainer = document.getElementById("dropcontainer"),
