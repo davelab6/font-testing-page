@@ -50,3 +50,10 @@ License
 Code is available under the MIT License, see LICENSE.md for full details
 
 Page text is available under the Creative Commons Attribution-ShareAlike v3.0 License
+
+How To
+-------------
+
+You can run this server on http://localhost/ with the following command:
+
+`sudo python -m SimpleHTTPServer 80`
