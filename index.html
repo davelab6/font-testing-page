@@ -21,10 +21,9 @@ var version = '10.0';
 document.title = 'Font Testing Page v' + version + ' - Impallari.com/testing'
 
 function pushVersion(json) {
-	$.getJSON(json, function(data) {
-		// Push version onto fontdrag.js system
-		TCNDDF.buildFontListItemFromCollabJsonData(data);
-	});
+	var data = $.parseJSON(json);
+	// Push version onto fontdrag.js system
+	TCNDDF.buildFontListItemFromCollabJsonData(data);
 };
 
 $(document).ready(function(){
