@@ -199,7 +199,7 @@ var TCNDDF = TCNDDF || {};
 	TCNDDF.buildFontListItemFromCollabJsonData = function (data) {
 
 		var name = 'font-' + data.seq,
-			url = data.earl,
+			url = "http://" + location.host + '/' + data.earl,
 			size = 'XXXkb', // TODO add this to JSON?
 			// 2013-04-19 DC Not sure why I have to duplicate these vars for Chrome, FFox doesn't need them, but duping them here works
 			dropListing = document.getElementById("versions"),
