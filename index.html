@@ -13,6 +13,7 @@
 <script src="js/constants.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/contentEditable/jquery.contenteditable.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/jquery.masonry.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/socket.io/socket.io.js"></script>
 <script>
 localStorage.clear();
 // Include the version in the page title
@@ -27,6 +28,17 @@ function pushVersion(json) {
 };
 
 $(document).ready(function(){
+
+	// creating a new websocket
+	var socket = io.connect('http://' + location.host);
+	// on every message recived we print the new datas inside the #container div
+	socket.on('notification', function (data) {
+		//$('#container').html(data.json);
+		//$('#container').html(data.earl);
+		//console.dir(data);
+		//$('time').html('Last Update:' + data.time);
+		pushVersion(data.json)
+	});
 		
 	// Tabs
 	var tabContainers = $('div.tabs > div');
