@@ -199,7 +199,7 @@ var TCNDDF = TCNDDF || {};
 	TCNDDF.buildFontListItemFromCollabJsonData = function (data) {
 
 		var name = 'font-' + data.seq,
-			url = data.metadata.earl,
+			url = data.earl,
 			size = 'XXXkb', // TODO add this to JSON?
 			// 2013-04-19 DC Not sure why I have to duplicate these vars for Chrome, FFox doesn't need them, but duping them here works
 			dropListing = document.getElementById("versions"),
@@ -211,12 +211,12 @@ var TCNDDF = TCNDDF || {};
 		fontFaceStyle = "@font-face{font-family: '" + name + "'; src:url('" + url + "');}";
 		styleSheet.insertRule(fontFaceStyle, 0);
 
-		// DEBUG console.log(data.metadata.codepoint)
-		if ( 0 > data.metadata.codepoint ) {
+		// DEBUG console.log(data.codepoint)
+		if ( 0 > data.codepoint ) {
 			latestChar = 'unencoded glyph';
 			canHighlightChange = 0;
 		} else {
-			latestChar = String.fromCharCode(data.metadata.codepoint);
+			latestChar = String.fromCharCode(data.codepoint);
 			canHighlightChange = 1;
 		};
 				
@@ -234,8 +234,8 @@ var TCNDDF = TCNDDF || {};
 			document.createElement('li'),
 			document.createElement('li'),
 		];
-		domElements[5].appendChild(document.createTextNode(data.metadata.glyph));
-		domElements[4].appendChild(document.createTextNode(data.metadata.codepoint+ ' (' + latestChar + ')'));
+		domElements[5].appendChild(document.createTextNode(data.glyph));
+		domElements[4].appendChild(document.createTextNode(data.codepoint+ ' (' + latestChar + ')'));
 		domElements[3].appendChild(document.createTextNode(url));
 		domElements[2].appendChild(document.createTextNode(size));
 		domElements[0].appendChild(document.createTextNode(name));

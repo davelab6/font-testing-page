@@ -1,9 +1,7 @@
 {
     "seq": 34,
-    "metadata": {
-        "codepoint": 66,
-        "earl": "http://127.0.0.1/ffc/font-34.ttf",
-        "end": "game over",
-        "glyph": "B"
-    }
+    "codepoint": 66,
+    "earl": "http://127.0.0.1/ffc/font-34.ttf",
+    "end": "game over",
+    "glyph": "B"
 }
