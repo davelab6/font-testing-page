@@ -227,29 +227,37 @@ var TCNDDF = TCNDDF || {};
 		}
 */
 		domElements = [
-			document.createElement('li'),
+			version,
 			document.createElement('ul'),
 			document.createElement('li'),
 			document.createElement('li'),
 			document.createElement('li'),
 			document.createElement('li'),
 		];
+
+
+		version = document.createElement('li'),
+		version.className = "active";
+		version.title = name;
+		version.appendChild(document.createTextNode(name));
+		
 		domElements[5].appendChild(document.createTextNode(data.glyph));
 		domElements[4].appendChild(document.createTextNode(data.codepoint+ ' (' + latestChar + ')'));
+		link = document.createElement('a');
+		link.href = url
 		domElements[3].appendChild(document.createTextNode(url));
 		domElements[2].appendChild(document.createTextNode(size));
-		domElements[0].appendChild(document.createTextNode(name));
-		domElements[0].className = "active";
-		domElements[0].title = name;
+		version.appendChild(document.createTextNode(name));
 		domElements[4].style.fontFamily = name;
 
-		domElements[0].appendChild(domElements[1]);
+		version.appendChild(domElements[1]);
 		domElements[1].appendChild(domElements[2]);
-		domElements[1].appendChild(domElements[3]);
+		domElements[1].appendChild(link);
+		link.appendChild(domElements[3]);
 		domElements[1].appendChild(domElements[4]);
 		domElements[1].appendChild(domElements[5]);
 
-		fontPreviewFragment.appendChild(domElements[0]);
+		fontPreviewFragment.appendChild(version);
 
 		dropListing.insertBefore(fontPreviewFragment, dropListing.firstChild);
 		// Comment the preceding line and uncomment the following to append FontListItems instead of prepending them
